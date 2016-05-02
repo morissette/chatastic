@@ -22,30 +22,60 @@ manager.add_command('db', MigrateCommand)
 class Slack(Resource):
 
     def get():
+        """
+        Get a Slack Account
+        """
         pass
 
     def post():
+        """
+        Connect to a Slack Account
+        """
         pass
 
 # PagerDuty Handler
 class PagerDuty(Resource):
 
     def get():
+        """
+        Get a Connected PagerDuty
+        """
         pass
 
     def post():
+        """
+        Connect to a PagerDuty Connection
+        """
         pass
 
 # HipChat Handler
 class HipChat(Resource):
 
     def get():
+        """
+        Get a Connected HipChat
+        """
         pass
 
     def post():
+        """
+        Connect to a HipChat Connection
+        """
         pass
 
 class Notification(Resource):
+
+    def get(self):
+        """
+        Get a list of pending messages
+        """
+        pass
+
+    def delete(self, message_id):
+        """
+        Delete Message id
+        """
+        pass
 
     def post(self):
         """
