@@ -118,5 +118,28 @@ var api_url = 'http://127.0.0.1:5000';
 
   });
 
+  app.controller('pagerdutyCtrl', function($scope) {
+
+  });
+
+  app.controller('slackCtrl', function($scope) {
+
+  });
+
+  app.controller('hipchatCtrl', function($scope) {
+
+  });
+
+  app.controller('victoropsCtrl', function($scope) {
+
+  });
+
+  app.controller('opsgenieCtrl', function($scope) {
+
+  });
+
+  app.controller('alertopsCtrl', function($scope) {
+
+  });
 
 })();
