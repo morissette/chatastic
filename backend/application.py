@@ -93,10 +93,10 @@ class Notification(Resource):
             return {"error": "Missing required fields"}
 
     def validate_number(self, number):
-        return True
+        return number
 
     def validate_word(self, word):
-        return True
+        return word
 
 # Setup Routes
 api.add_resource(Slack, '/slack')
