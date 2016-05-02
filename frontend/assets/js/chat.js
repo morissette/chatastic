@@ -27,6 +27,11 @@ var api_url = 'http://127.0.0.1:5000';
           controller: 'dashboardCtrl',
           currentPage: 'Dashboard'
         }).
+        when('/settings', {
+          templateUrl: 'partials/settings.html',
+          controller: 'settingsCtrl',
+          currentPage: 'Settings'
+        }).
         when('/pagerduty/settings', {
           templateUrl: 'partials/pagerduty.html',
           controller: 'pagerdutyCtrl',
@@ -109,6 +114,16 @@ var api_url = 'http://127.0.0.1:5000';
    */
   app.controller('dashboardCtrl', function($scope, $rootScope) {
     $rootScope.loggedIn = true;
+  });
+
+  /*
+   * Header directive
+   */
+  app.directive('dashboardHeader', function() {
+      return {
+          restrict: 'E',
+          templateUrl: 'partials/header.html'
+      };
   });
 
   /*

@@ -230,5 +230,25 @@ html,body {
   padding:25px; 
   background:#205081;
   color:#fff;
-  text-align:center;
+}
+
+.controls {
+  text-align:right;
+  position:relative;
+  top:25px;
+}
+
+.controls i {
+  cursor:pointer;
+}
+
+.controls a,
+.controls a:hover,
+.controls a:focus 
+.controls a:visited {
+  color:#fff;
+}
+
+.connect-row {
+  margin-top:25px;
 }
