@@ -1,0 +1,234 @@
+/*
+ * Ample Health
+ * Main Styles
+ */
+* {
+  margin:0;
+  padding:0;
+  font-family:'Montserrat', sans-serif;
+}
+
+html,body {
+  height:100%;
+  background:#ddd;
+}
+
+.wrapper {
+  height:100%;
+}
+
+.header {
+  height:100%;
+  width:100%;
+  background:url(/assets/img/logo2.jpg) no-repeat center center fixed;
+  background-size:cover;
+  text-align:center;
+}
+
+/*
+ * Iphone 6
+ */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+
+  .wrapper {
+    height:50%;
+  }
+
+  .header {
+    background:url(/assets/img/header1.jpg) no-repeat;
+    background-size:100%;
+  }
+
+  .nav-login {
+    top:39%;
+  }
+
+}
+
+.page-title {
+  position:relative;
+  top:20%;
+  font-size:5em;
+  color:#fff;
+  text-shadow:#474747 3px 5px 2px;
+}
+
+.page-description {
+  position:relative;
+  top:20%;
+  font-size:1.8em;
+  color:#fff;
+  text-shadow:#474747 2px 2px 4px;
+  margin:0 auto;
+  background: rgba(0,0,0,0.5);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.desc {
+  width:40%;
+  display:inline-block;
+}
+
+.signup {
+  position:relative;
+  top:25%;
+}
+
+.signup .btn {
+  margin-left:15px;
+  margin-right:15px;
+  padding:15px;
+}
+
+.btn-vendor {
+  background-color: rgba(242, 138, 138, 0.3);
+  color:#fff;
+  font-weight:600;
+  border:2px solid rgba(242, 138, 138, 0.8);
+}
+
+.btn-vendor:hover {
+  background-color: rgba(242, 138, 138, 0.8);
+  color:#fff;
+}
+
+.btn-client {
+  background-color: rgba(242, 138, 138, 0.3);
+  border:2px solid rgba(242, 138, 138, 0.8);
+  color:#fff;
+  font-weight:600;
+}
+
+.btn-client:hover {
+  background-color: rgba(242, 138, 138, 0.8);
+  color:#fff;
+}
+
+.btn-sign-up {
+  background-color: rgba(242, 138, 138, 0.8);
+  color:rgba(255,255,255,0.7);
+  font-size:2em;
+  padding:20px;
+}
+
+.btn-sign-up:hover,
+.btn-sign-up:focus {
+  background-color: rgba(242, 138, 138, 1);
+  color:rgba(255,255,255,0.9);
+}
+
+.btn-login {
+  padding: 15px;
+  border: none;
+  outline: none;
+  margin-top: -2px;
+  margin-left: -4px; 
+  border-radius:0px;
+  background-color: rgba(128, 138, 255, 1); 
+  color:#fff;
+}
+
+.bottom-menu {
+  text-align:right;
+}
+
+.brand {
+  line-height:50px;
+  color:#fff;
+  font-size:1.3em;
+  float:left;
+  margin-left:10%;
+}
+
+.nav-login {
+  height:50px;
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(0,0,0,0.8);
+  z-index:9999;
+}
+
+.nav-login ul {
+  list-style-type:none;
+  display:inline-block;
+}
+
+.nav-login ul li {
+  float:left;
+}
+
+.nav-login ul li a {
+  color:#fff;
+  margin-left:20px;
+  margin-right:20px;
+  line-height:50px;
+  font-size:1.3em;
+}
+
+.sign-in, .password {
+  line-height:50px;
+  padding-left:15px;
+  padding-right:20px;
+  outline:none;
+  border:none;
+  border-radius:none;
+}
+
+.landing-content {
+  margin-left:10%;
+  margin-right:10%;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+
+.landing-sep {
+  margin-left:15%;
+  margin-right:15%;
+}
+
+.landing-content h1 {
+  text-align:center;
+}
+
+/*
+ * Misc Class
+ */
+.center {
+  text-align:center;
+}
+
+.fixed-to-top {
+  position:fixed;
+  top:0;
+  z-index:9999;
+}
+
+/*
+ * dashboard
+ */
+.dashboard .row {
+    margin-top:25px;
+}
+
+.dashboard .row .col-md-3 {
+  padding:30px;
+  text-align:center;
+}
+
+.dashboard .row .panel {
+  cursor:pointer;
+}
+
+.dashboard-header {
+  padding:25px; 
+  background:#205081;
+  color:#fff;
+  text-align:center;
+}

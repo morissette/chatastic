@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" ng-app="chatastic">
+  <head>
+    <base href="/">
+    <title>Chatastic</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/chat.css">
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js"></script>
+    <script src="/assets/js/chat.js"></script>
+  </head>
+  <body ng-controller="bodyCtrl">
+
+    <!-- Content is loaded here -->
+    <div ng-view></div>
+
+    <!-- Landing Page -->
+    <div class="wrapper" ng-hide="loggedIn">
+
+      <!-- Main Header Img -->
+      <div class="header">
+
+        <!-- Title -->
+        <div class="page-title animated fadeIn">Chatastic</div>
+
+        <!-- Description -->
+        <div class="page-description animated fadeIn">
+          <div class="desc">
+            One Chat API to Rule them All
+          </div>
+        </div>
+
+        <!-- Sign Up -->
+        <div class="signup animated fadeIn">
+          <button class="btn btn-sign-up" data-toggle="modal" data-target="#registerModal">Register Today</button>
+        </div>
+
+      </div>
+
+      <!-- Bottom Nav -->
+      <div class="nav-login" ng-controller="loginCtrl">
+        <div class="bottom-menu">
+          <span class="brand">Chatastic</span>
+          <ul class="nav-list">
+            <li>
+              <form name="login">
+                <input type="email" class="sign-in" ng-model="user.email" placeholder="jack.johnson@gmail.com" required>
+                <input type="password" class="password" ng-model="user.password" placeholder="********" required>
+                <button type="submit" class="btn btn-login" ng-disabled="login.$invalid" ng-click="signIn()">Sign In</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
