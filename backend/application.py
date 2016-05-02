@@ -9,6 +9,8 @@ import json
 
 # Setup Core Flask
 app = Flask(__name__)
+app.config.from_object('config.Production')
+
 CORS(app)
 db = SQLAlchemy(app)
 api = Api(app)
