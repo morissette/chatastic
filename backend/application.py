@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from aws import create_session
+import json
 
 # Setup Core Flask
 app = Flask(__name__)
@@ -50,16 +51,52 @@ class Notification(Resource):
         """
         create notification in SQS
         takes JSON
+        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"hello": "world"}'
         {
-            "id": \d+,
-            "account_id": \d+,
-            "name": \S+,
-            "provider": \d+,
-            "message": \d+,
+                "error": "Missing required fields"
+        }
+        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"id": 1, "account_id": 1, "provider": 1, "message": "hello"}'
+        {
+                "success": "Message queued"
         }
         """
+        data = request.get_json(force=True)
+        id = self.validate_number(data.get('id'))
+        account_id = self.validate_number(data.get('account_id'))
+        name = self.validate_word(data.get('name'))
+        provider = self.validate_number(data.get('provider'))
+        message = data.get('message')
+        if id and account_id and name and provider and message:
+            message_json = json.dumps({
+                "id": id,
+                "account_id": account_id,
+                "name": name,
+                "provider": provider,
+                "message": message,
+            })
+            session = create_session()
+            response = session.get_queue_url(
+                QueueName='MyChatQueue'
+            )
+            url = response['QueueUrl']
 
-        pass
+            if url:
+                session.send_message(
+                    QueueUrl=url,
+                    MessageBody=message_json,
+                    DelaySeconds=0,
+                )
+                return {"success": "Message queued"}
+            else:
+                return {"error": "Failed to get SQS queue"}
+        else:
+            return {"error": "Missing required fields"}
+
+    def validate_number(self, number):
+        return True
+
+    def validate_word(self, word):
+        return True
 
 # Setup Routes
 api.add_resource(Slack, '/slack')
