@@ -55,7 +55,7 @@ class Notification(Resource):
         {
                 "error": "Missing required fields"
         }
-        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"id": 1, "account_id": 1, "provider": 1, "message": "hello"}'
+        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"id": 1, "account_id": 1, "provider": 1, "message": "hello", "name": "foo"}'
         {
                 "success": "Message queued"
         }
