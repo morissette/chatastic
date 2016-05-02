@@ -62,6 +62,11 @@ var api_url = 'http://127.0.0.1:5000';
           controller: 'alertopsCtrl',
           currentPage: 'AlertOps Settings'
         }).
+        when('/flowdock/settings', {
+          templateUrl: 'partials/flowdock.html',
+          controller: 'flowdockCtrl',
+          currentPage: 'FlowDock Settings'
+        }).
         otherwise({
           redirectTo: '/'
         });
