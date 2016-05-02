@@ -69,12 +69,31 @@ class Notification(Resource):
         """
         Get a list of pending messages
         """
-        pass
+        session = create_session()
+        response = session.get_queue_url(
+            QueueName='MyChatQueue'
+        )
+        url = response['QueueUrl']
+        if url:
+            messages = session.receive_message(
+                QueueUrl=url,
+                AttributeNames=['All'],
+                MaxNumberOfMessages=1,
+                VisibilityTimeout=60,
+                WaitTimeSeconds=5
+            )
+            if messages:
+                return {"success": messages}
+            else:
+                return {"error": "Unable to retreive messages"}
+        else:
+            return {"error": "Unable to retreive queue"}
 
     def delete(self, message_id):
         """
         Delete Message id
         """
+        session = create_session()
         pass
 
     def post(self):
