@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from aws import create_session
+from models import *
 import json
 
 # Setup Core Flask
@@ -23,28 +24,35 @@ manager.add_command('db', MigrateCommand)
 # Slack Handler
 class Slack(Resource):
 
-    def get():
+    def get(self):
         """
         Get a Slack Account
         """
         pass
 
-    def post():
+    def post(self):
         """
         Connect to a Slack Account
         """
-        pass
+        account_id = 1
+        provider_id = 1
+        token = 'hello'
+        channel = 'testing'
+        botname = 'supertest'
+        new = ProviderSettings.init(account_id, provider_id, token, channel, botname)
+        db.session.add(new)
+        db.session.commit()
 
 # PagerDuty Handler
 class PagerDuty(Resource):
 
-    def get():
+    def get(self):
         """
         Get a Connected PagerDuty
         """
         pass
 
-    def post():
+    def post(self):
         """
         Connect to a PagerDuty Connection
         """
@@ -53,13 +61,13 @@ class PagerDuty(Resource):
 # HipChat Handler
 class HipChat(Resource):
 
-    def get():
+    def get(self):
         """
         Get a Connected HipChat
         """
         pass
 
-    def post():
+    def post(self):
         """
         Connect to a HipChat Connection
         """
