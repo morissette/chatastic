@@ -39,9 +39,10 @@ class Slack(Resource):
         token = 'hello'
         channel = 'testing'
         botname = 'supertest'
-        new = ProviderSettings.init(account_id, provider_id, token, channel, botname)
+        new = ProviderSettings(account_id, provider_id, token, channel, botname)
         db.session.add(new)
         db.session.commit()
+        return {"success": "Slack Integrated"}
 
 # PagerDuty Handler
 class PagerDuty(Resource):
