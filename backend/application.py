@@ -4,7 +4,7 @@ from flask.ext.cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from boto3.session import Session
+from aws import create_session
 
 # Setup Core Flask
 app = Flask(__name__)
