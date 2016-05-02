@@ -10,18 +10,18 @@
       <form>
         <div class="form-group">
             <label for="token">Token</label>
-            <input type="text" id="token" class="form-control" ng-model="token" placeholder="xoxp-123456789-123456789-123456789-123456789">
+            <input type="text" id="token" class="form-control" ng-model="setup.token" placeholder="xoxp-123456789-123456789-123456789-123456789" required>
         </div>
         <div class="form-group">
             <label for="channel">Channel Code</label>
-            <input type="text" id="channel" class="form-control" ng-model="channel" placeholder="C0D3CUJ7M">
+            <input type="text" id="channel" class="form-control" ng-model="setup.channel" placeholder="C0D3CUJ7M" required>
         </div>
         <div class="form-group">
             <label for="botname">Bot Name</label>
-            <input type="text" id="botname" class="form-control" ng-model="botname" placeholder="MySuperBot">
+            <input type="text" id="botname" class="form-control" ng-model="setup.botname" placeholder="MySuperBot" required>
         </div>
         <div class="form-group">
-            <button class="btn btn-block btn-primary">Connect Slack</button>
+            <button class="btn btn-block btn-primary" ng-click="connectSlack()">Connect Slack</button>
         </div>
       </form>
     </div>

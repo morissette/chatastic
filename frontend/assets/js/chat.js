@@ -138,6 +138,20 @@ var api_url = 'http://127.0.0.1:5000';
   });
 
   app.controller('slackCtrl', function($scope) {
+    var vm = $scope;
+    
+    vm.setup = {}
+
+    vm.connectSlack = function() {
+      var token = vm.setup.token;
+      var channel = vm.setup.channel;
+      var name = vm.setup.botname;
+      console.log(token + channel + name);
+    
+      if ( success ) {
+        vm.setup = {};
+      }
+    }
 
   });
 
