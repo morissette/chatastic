@@ -179,8 +179,18 @@ var api_url = 'http://127.0.0.1:5000';
 
   });
 
-  app.controller('hipchatCtrl', function($scope) {
+  app.controller('hipchatCtrl', function($scope, $http) {
+    var vm = $scope;
 
+    vm.setup = {};
+
+    $http.get(api_url + '/hipchat').then(function(res) {
+        if ( res.data.success ) {
+            vm.success = res.data.success;
+        } else {
+            vm.error = res.data.error;
+        }
+    });
   });
 
   app.controller('victoropsCtrl', function($scope) {
