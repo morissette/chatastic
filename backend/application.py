@@ -34,15 +34,19 @@ class Slack(Resource):
         """
         Connect to a Slack Account
         """
+        data = request.get_json(force=True)
         account_id = 1
-        provider_id = 1
-        token = 'hello'
-        channel = 'testing'
-        botname = 'supertest'
-        new = ProviderSettings(account_id, provider_id, token, channel, botname)
-        db.session.add(new)
-        db.session.commit()
-        return {"success": "Slack Integrated"}
+        provider_id = 2
+        token = data.get('token')
+        channel = data.get('channel')
+        botname = data.get('botname')
+        if token and channel and botname:
+            new = ProviderSettings(account_id, provider_id, token, channel, botname)
+            db.session.add(new)
+            db.session.commit()
+            return {"success": "Slack Integrated"}
+        else:
+            return {"error": "Missing required fields"}
 
 # PagerDuty Handler
 class PagerDuty(Resource):
@@ -57,7 +61,19 @@ class PagerDuty(Resource):
         """
         Connect to a PagerDuty Connection
         """
-        pass
+	data = request.get_json(force=True)
+        account_id = 1
+        provider_id = 1
+        token = data.get('token')
+        channel = data.get('channel')
+        botname = data.get('botname')
+        if token and channel and botname:
+            new = ProviderSettings(account_id, provider_id, token, channel, botname)
+            db.session.add(new)
+            db.session.commit()
+            return {"success": "Slack Integrated"}
+        else:
+            return {"error": "Missing required fields"}
 
 # HipChat Handler
 class HipChat(Resource):
@@ -72,7 +88,19 @@ class HipChat(Resource):
         """
         Connect to a HipChat Connection
         """
-        pass
+	data = request.get_json(force=True)
+        account_id = 1
+        provider_id = 3
+        token = data.get('token')
+        channel = data.get('channel')
+        botname = data.get('botname')
+        if token and channel and botname:
+            new = ProviderSettings(account_id, provider_id, token, channel, botname)
+            db.session.add(new)
+            db.session.commit()
+            return {"success": "Slack Integrated"}
+        else:
+            return {"error": "Missing required fields"}
 
 class Notification(Resource):
 
