@@ -175,6 +175,46 @@ class HipChat(Resource):
             response = requests.post(url, payload, headers=headers)
             return {"success": "Message Sent"}
 
+class VictorOps(Resource):
+
+    def get(self):
+        account_id = 1
+        provider_id = 4
+        settings = get_creds(account_id, provider_id)
+        if settings:
+            return {"success": settings}
+        else:
+            return {"error": "No HipChat Account Connected"}
+
+    def post(self):
+        data = request.get_json(force=True)
+        account_id = 1
+        provider_id = 4
+        token = data.get('token')
+        botname = data.get('botname')
+        if token and channel and botname:
+            new = ProviderSettings(account_id, provider_id, token, channel, botname)
+            db.session.add(new)
+            db.session.commit()
+            return {"success": "VictorOps Integrated"}
+        else:
+            return {"error": "Missing required fields"}
+
+    def put(self):
+        message = request.get_json(force=True)['message']
+        account_id = 1
+        provider_id = 4
+        settings = get_creds(account_id, provider_id)
+        if settings:
+            api_id = '53c604c5'
+            url = 'https://alert.victorops.com/integrations/generic/20131114/alert/69f3d1a0-05de-4b81-893c-c93497c12ca1/hackathon'
+            payload = json.dumps({
+                "message_type": "CRITICAL",
+                "state_message": message
+            })
+            response = requests.post(url, payload)
+            return {"success": "Message Sent"}
+
 class Notification(Resource):
 
     def get(self):
@@ -266,6 +306,7 @@ def get_creds(account_id, provider_id):
 api.add_resource(Slack, '/slack')
 api.add_resource(PagerDuty, '/pagerduty')
 api.add_resource(HipChat, '/hipchat')
+api.add_resource(VictorOps, '/victorops')
 
 # Notification Routes
 api.add_resource(Notification, '/notification')
