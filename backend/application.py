@@ -28,7 +28,13 @@ class Slack(Resource):
         """
         Get a Slack Account
         """
-        pass
+      	account_id = 1
+        provider_id = 2
+        settings = ProviderSettings.query.filter_by(account_id = account_id, provider_id = provider_id).first()
+        if settings:
+            return {"success": settings.as_dict()}
+        else:
+            return {"error": "No Slack Account Connected"}
 
     def post(self):
         """
@@ -55,7 +61,14 @@ class PagerDuty(Resource):
         """
         Get a Connected PagerDuty
         """
-        pass
+	account_id = 1
+        provider_id = 1
+        settings = ProviderSettings.query.filter_by(account_id = account_id, provider_id = provider_id).first()
+        if settings:
+            return {"success": settings.as_dict()}
+        else:
+            return {"error": "No PagerDuty Account Connected"}
+
 
     def post(self):
         """
@@ -71,7 +84,7 @@ class PagerDuty(Resource):
             new = ProviderSettings(account_id, provider_id, token, channel, botname)
             db.session.add(new)
             db.session.commit()
-            return {"success": "Slack Integrated"}
+            return {"success": "PagerDuty Integrated"}
         else:
             return {"error": "Missing required fields"}
 
@@ -82,7 +95,14 @@ class HipChat(Resource):
         """
         Get a Connected HipChat
         """
-        pass
+        account_id = 1
+        provider_id = 3
+        settings = ProviderSettings.query.filter_by(account_id = account_id, provider_id = provider_id).first()
+        if settings:
+            return {"success": settings.as_dict()}
+        else:
+            return {"error": "No HipChat Account Connected"}
+
 
     def post(self):
         """
@@ -98,7 +118,7 @@ class HipChat(Resource):
             new = ProviderSettings(account_id, provider_id, token, channel, botname)
             db.session.add(new)
             db.session.commit()
-            return {"success": "Slack Integrated"}
+            return {"success": "HipChat Integrated"}
         else:
             return {"error": "Missing required fields"}
 
@@ -143,7 +163,7 @@ class Notification(Resource):
         {
                 "error": "Missing required fields"
         }
-        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"id": 1, "account_id": 1, "provider": 1, "message": "hello", "name": "foo"}'
+        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"id": 1, "account_id": 1, "message": "hello", "name": "foo"}'
         {
                 "success": "Message queued"
         }
@@ -152,14 +172,12 @@ class Notification(Resource):
         id = self.validate_number(data.get('id'))
         account_id = self.validate_number(data.get('account_id'))
         name = self.validate_word(data.get('name'))
-        provider = self.validate_number(data.get('provider'))
         message = data.get('message')
-        if id and account_id and name and provider and message:
+        if id and account_id and name and message:
             message_json = json.dumps({
                 "id": id,
                 "account_id": account_id,
                 "name": name,
-                "provider": provider,
                 "message": message,
             })
             session = create_session()
