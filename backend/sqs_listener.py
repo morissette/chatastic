@@ -162,6 +162,7 @@ class MyDaemon(Daemon):
         requests.put(api_url + '/hipchat', payload)
         requests.put(api_url + '/slack', payload)
         requests.put(api_url + '/pagerduty', payload)
+        requests.put(api_url + '/victorops', payload)
         return True
 
     def delete_msg(self, client, url, receipt_handle):

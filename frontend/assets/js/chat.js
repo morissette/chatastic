@@ -193,7 +193,18 @@ var api_url = 'http://127.0.0.1:5000';
     });
   });
 
-  app.controller('victoropsCtrl', function($scope) {
+  app.controller('victoropsCtrl', function($scope, $http) {
+    var vm = $scope;
+
+    vm.scope = {};
+
+    $http.get(api_url + '/victorops').then(function(res) {
+      if ( res.data.success ) {
+        vm.success = res.data.success;
+      } else {
+        vm.error = res.data.error;
+      }
+    });
 
   });
 

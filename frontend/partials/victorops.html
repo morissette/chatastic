@@ -1,1 +1,45 @@
 <dashboard-header></dashboard-header>
+<div class="container">
+  <div class="row connect-row">
+    <div class="col-md-12 center">
+        <img src="/assets/img/victorops.png">
+    </div>
+  </div>
+  <div class="row connect-row" ng-show="success">
+    <div class="col-md-12">
+      <h2>Connected VictorOps accounts</h2>
+      <table class="table table-border table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{success.token}}</td>
+            <td>{{success.botname}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row connect-row">
+    <div class="col-md-12">
+      <h2>Connect a new VictorOps account</h2>
+      <form>
+        <div class="form-group">
+            <label for="token">Token</label>
+            <input type="text" id="token" class="form-control" ng-model="setup.token" placeholder="xoxp-123456789-123456789-123456789-123456789" required>
+        </div>
+        <div class="form-group">
+            <label for="botname">Bot Name</label>
+            <input type="text" id="botname" class="form-control" ng-model="setup.botname" placeholder="MySuperBot" required>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-block btn-primary" ng-click="connectVictor()">Connect VictorOps</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
