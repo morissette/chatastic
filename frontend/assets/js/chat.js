@@ -138,14 +138,33 @@ var api_url = 'http://127.0.0.1:5000';
 
   });
 
-  app.controller('pagerdutyCtrl', function($scope) {
+  app.controller('pagerdutyCtrl', function($scope, $http) {
+    var vm = $scope;
+
+    vm.setup = {};
+
+    $http.get(api_url + '/pagerduty').then(function(res) {
+        if ( res.data.success ) {
+            vm.success = res.data.success;
+        } else {
+            vm.error = res.data.error;
+        }
+    });
 
   });
 
-  app.controller('slackCtrl', function($scope) {
+  app.controller('slackCtrl', function($scope, $http) {
     var vm = $scope;
     
-    vm.setup = {}
+    vm.setup = {};
+
+    $http.get(api_url + '/slack').then(function(res) {
+        if ( res.data.success ) {
+            vm.success = res.data.success;
+        } else {
+            vm.error = res.data.error;
+        }
+    });
 
     vm.connectSlack = function() {
       var token = vm.setup.token;

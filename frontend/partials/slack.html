@@ -5,8 +5,30 @@
         <img src="/assets/img/slack.png">
     </div>
   </div>
+  <div class="row connect-row" ng-show="success">
+    <div class="col-md-12">
+      <h2>Connected slack accounts</h2>
+      <table class="table table-border table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Channel</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{success.token}}</td>
+            <td>{{success.channel}}</td>
+            <td>{{success.botname}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <div class="row connect-row">
     <div class="col-md-12">
+      <h2>Connect a new slack account</h2>
       <form>
         <div class="form-group">
             <label for="token">Token</label>

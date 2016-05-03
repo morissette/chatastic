@@ -82,9 +82,9 @@ class PagerDuty(Resource):
         """
 	account_id = 1
         provider_id = 1
-        settings = ProviderSettings.query.filter_by(account_id = account_id, provider_id = provider_id).first()
+        settings = get_creds(account_id, provider_id)
         if settings:
-            return {"success": settings.as_dict()}
+            return {"success": settings}
         else:
             return {"error": "No PagerDuty Account Connected"}
 
@@ -107,6 +107,21 @@ class PagerDuty(Resource):
         else:
             return {"error": "Missing required fields"}
 
+    def put(self):
+        message = request.get_json(force=True)['message']
+        account_id = 1
+        provider_id = 1
+        settings = get_creds(account_id, provider_id)
+        if settings:
+            url = 'https://events.pagerduty.com/generic/2010-04-15/create_event.json'
+            payload = json.dumps({
+                "service_key": '798d0f7fd0ec4132a7f0cc6ac055d6ea',
+                "event_type": 'trigger',
+                "description": message
+            })
+            response = requests.post(url, payload)
+            print response
+
 # HipChat Handler
 class HipChat(Resource):
 
@@ -116,9 +131,9 @@ class HipChat(Resource):
         """
         account_id = 1
         provider_id = 3
-        settings = ProviderSettings.query.filter_by(account_id = account_id, provider_id = provider_id).first()
+        settings = get_creds(account_id, provider_id)
         if settings:
-            return {"success": settings.as_dict()}
+            return {"success": settings}
         else:
             return {"error": "No HipChat Account Connected"}
 
