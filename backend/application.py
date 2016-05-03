@@ -216,7 +216,7 @@ class Notification(Resource):
         {
                 "error": "Missing required fields"
         }
-        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"id": 1, "account_id": 1, "message": "hello", "name": "foo"}'
+        [root@mori ~]# curl -X POST localhost:5000/notification -d '{"id": 1, "account_id": 1, "message": "hello"}'
         {
                 "success": "Message queued"
         }
@@ -224,13 +224,11 @@ class Notification(Resource):
         data = request.get_json(force=True)
         id = self.validate_number(data.get('id'))
         account_id = self.validate_number(data.get('account_id'))
-        name = self.validate_word(data.get('name'))
         message = data.get('message')
-        if id and account_id and name and message:
+        if id and account_id and message:
             message_json = json.dumps({
                 "id": id,
                 "account_id": account_id,
-                "name": name,
                 "message": message,
             })
             session = create_session()
