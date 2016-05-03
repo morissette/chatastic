@@ -6,7 +6,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from aws import create_session
 from models import *
-import json
+import json, requests
 
 # Setup Core Flask
 app = Flask(__name__)
@@ -30,9 +30,9 @@ class Slack(Resource):
         """
       	account_id = 1
         provider_id = 2
-        settings = ProviderSettings.query.filter_by(account_id = account_id, provider_id = provider_id).first()
+        settings = get_creds(account_id, provider_id)
         if settings:
-            return {"success": settings.as_dict()}
+            return {"success": settings}
         else:
             return {"error": "No Slack Account Connected"}
 
@@ -53,6 +53,25 @@ class Slack(Resource):
             return {"success": "Slack Integrated"}
         else:
             return {"error": "Missing required fields"}
+
+    def put(self):
+	message = request.get_json(force=True)['message']
+        account_id = 1
+        provider_id = 2
+        settings = get_creds(account_id, provider_id)
+        if settings:
+            token = settings['token']
+            channel = settings['channel']
+            botname = settings['botname']
+	    url = "https://slack.com/api/chat.postMessage?token=" + \
+            token + "&channel=" + \
+            channel + "&username=" + \
+            botname + "&text=" + message
+   	    try:
+        	requests.get(url)
+        	return {"success": "Message sent"}
+    	    except requests.exceptions.ConnectionError:
+        	return {"error": "Unable to connect to slack"}
 
 # PagerDuty Handler
 class PagerDuty(Resource):
@@ -203,6 +222,13 @@ class Notification(Resource):
 
     def validate_word(self, word):
         return word
+
+
+# Functions
+def get_creds(account_id, provider_id):
+    settings = ProviderSettings.query.filter_by(account_id = account_id, provider_id = provider_id).first()
+    if settings:
+        return settings.as_dict()
 
 # Setup Routes
 api.add_resource(Slack, '/slack')
