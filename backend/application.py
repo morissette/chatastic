@@ -6,7 +6,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from aws import create_session
 from models import *
-import json, requests
+import json, requests, urllib2
 
 # Setup Core Flask
 app = Flask(__name__)
@@ -155,6 +155,25 @@ class HipChat(Resource):
             return {"success": "HipChat Integrated"}
         else:
             return {"error": "Missing required fields"}
+
+    def put(self):
+        """
+        Send notifcation to hipchat
+        """
+        message = request.get_json(force=True)['message']
+        account_id = 1
+        provider_id = 3
+        settings = get_creds(account_id, provider_id)
+        if settings:
+            url = 'https://api.hipchat.com/v2/room/2637466/notification?auth_token={}'.format(settings['token'])
+            headers = {
+                "Content-type": "application/json"
+            }
+            payload = json.dumps({
+                "message": message,
+            })
+            response = requests.post(url, payload, headers=headers)
+            return {"success": "Message Sent"}
 
 class Notification(Resource):
 
